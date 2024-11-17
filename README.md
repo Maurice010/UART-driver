@@ -7,9 +7,9 @@ Basic UART driver for Linux
 The purpose of device drivers it to define how our system interacts with particular hardware. The obvious thing is that device drivers exisits inside the enviroment called OS and to be more precise they are part of Linux kernel, but function as a dynamically loadable modules (they can be added/removed during runtime). It means that to interact properly with the OS device drivers need to implement previously defined user calls (e.g open, close, read, write) that are independent of hardware. 
 
 There are 3 driver types:
-- character driver - access, usually sequential, via stream of bytes (serial ports, terminals), file-based
-- block driver - random access via blocks of data (storage devices), file-based
-- network driver - packet-based comunication (network interfaces), socket-based
+- **character driver** - access, usually sequential, via stream of bytes (serial ports, terminals), file-based
+- **block driver** - random access via blocks of data (storage devices), file-based
+- **network driver** - packet-based comunication (network interfaces), socket-based
 
 Hardware devices are represented by device files in file system in /dev directory, for example /dev/sda (hard disk). There are also pseudo devices which are not connected to any hardware - they are just implemented as device drivers which allows them to offer the same interface as regular drivers (e.g. /dev/null, /dev/random, /dev/zero)
 
@@ -73,17 +73,22 @@ Shared interrupts
 ### Locking primitves
 Spinning locks:
 1. Spinlocks
+
 spin_lock(&lock) - acquires the lock without modifying interrupt state (possible deadlocks when we have interrupts)
 spin_lock_irq(&lock) - acquires the lock and disables local CPU interrupts
 spin_lock_irqsave(&lock, flags) - acquires the lock and disables local CPU interrupts, saving the interrupt state for restoration
+
 2. Reader-writer spinlocks (analogous to normal spinlocks)
+
 read_lock(&lock)
 write_lock(&lock)
 
 Sleeping locks:
 1. Mutexes (allow one task to hold the lock)
+
 mutex_lock(&my_mutex)
 mutex_trylock(&my_mutex) - non-blocking unlike instruction above
+
 2. Semaphore (can allow multiple tasks to access a shared resource concurrently)
 
 ### Deferred work
