@@ -71,8 +71,9 @@ Shared interrupts
 - to debug and monitor shared IRQs: cat /proc/interrupts
 
 ### Locking primitves
-Spinning locks:
-Spinlocks
+**Spinning locks:**
+
+**Spinlocks**
 
 spin_lock(&lock) - acquires the lock without modifying interrupt state (possible deadlocks when we have interrupts)
 
@@ -80,19 +81,20 @@ spin_lock_irq(&lock) - acquires the lock and disables local CPU interrupts
 
 spin_lock_irqsave(&lock, flags) - acquires the lock and disables local CPU interrupts, saving the interrupt state for restoration
 
-Reader-writer spinlocks (analogous to normal spinlocks)
+**Reader-writer spinlocks** (analogous to normal spinlocks)
 
 read_lock(&lock)
 
 write_lock(&lock)
 
-Sleeping locks:
-Mutexes (allow one task to hold the lock)
+**Sleeping locks:**
+
+**Mutexes** (allow one task to hold the lock)
 
 mutex_lock(&my_mutex)
 
 mutex_trylock(&my_mutex) - non-blocking unlike instruction above
 
-Semaphore (can allow multiple tasks to access a shared resource concurrently)
+**Semaphore** (can allow multiple tasks to access a shared resource concurrently)
 
 ### Deferred work
