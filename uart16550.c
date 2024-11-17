@@ -174,7 +174,7 @@ static ssize_t uart16550_read(struct file *file, char __user *user_buffer, size_
     atomic_set(&uart->is_read_done, 0);
     outb(inb(uart->base + UART_IER) | UART_IER_RDI, uart->base + UART_IER);
 
-	return num_read;
+    return num_read;
 }
 
 static ssize_t uart16550_write(struct file *file, const char __user *user_buffer, size_t size, loff_t *offset)
@@ -202,7 +202,7 @@ static ssize_t uart16550_write(struct file *file, const char __user *user_buffer
     outb(inb(uart->base + UART_IER) | UART_IER_THRI, uart->base + UART_IER);
     wait_event_interruptible(uart->write_queue, atomic_read(&uart->is_write_done) == 1);
 
-	return uart->num_wrote;
+    return uart->num_wrote;
 }
 
 static long uart16550_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
@@ -226,11 +226,11 @@ static long uart16550_ioctl(struct file *file, unsigned int cmd, unsigned long a
 		return -ENOTTY;
 	}
 
-	return 0;
+     return 0;
 }
 
 static const struct file_operations uart_fops = {
-	.owner = THIS_MODULE,
+    .owner = THIS_MODULE,
     .open = uart16550_open,
     .release = uart16550_release,
     .read = uart16550_read,
@@ -370,7 +370,7 @@ exit_unregister:
         unregister_chrdev_region(MKDEV(UART_MAJOR, 1), 1);
     }
 
-	return ret;
+    return ret;
 }
 
 static int uart16550_init(void)
