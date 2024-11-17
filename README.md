@@ -75,18 +75,22 @@ Spinning locks:
 1. Spinlocks
 
 spin_lock(&lock) - acquires the lock without modifying interrupt state (possible deadlocks when we have interrupts)
+
 spin_lock_irq(&lock) - acquires the lock and disables local CPU interrupts
+
 spin_lock_irqsave(&lock, flags) - acquires the lock and disables local CPU interrupts, saving the interrupt state for restoration
 
 2. Reader-writer spinlocks (analogous to normal spinlocks)
 
 read_lock(&lock)
+
 write_lock(&lock)
 
 Sleeping locks:
 1. Mutexes (allow one task to hold the lock)
 
 mutex_lock(&my_mutex)
+
 mutex_trylock(&my_mutex) - non-blocking unlike instruction above
 
 2. Semaphore (can allow multiple tasks to access a shared resource concurrently)
